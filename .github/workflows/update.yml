@@ -1,0 +1,28 @@
+name: Update update.md
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # Runs daily at midnight UTC
+  push:
+    branches:
+      - main
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Ruby
+      uses: actions/setup-ruby@v1
+      with:
+        ruby-version: '3.2.2'
+
+    - name: Run update script
+      run: |
+        gem install time securerandom
+        ruby update_script.rb
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
