@@ -40,12 +40,12 @@ File.open(update_file_path, 'a') do |file|
   file.puts "1. Last update: #{current_time} (ID: #{unique_id})"
 end
 
-# # Configure local Git user information
-# git_username = 'YourUsername' # Replace with your Git username
-# git_email = 'youremail@example.com' # Replace with your Git email
+# Configure local Git user information from environment variables
+git_username = ENV['GIT_USERNAME']
+git_email = ENV['GIT_EMAIL']
 
-# `git config user.name "#{git_username}"`
-# `git config user.email "#{git_email}"`
+`git config user.name "#{git_username}"`
+`git config user.email "#{git_email}"`
 
 # Stage the changes
 `git add #{update_file_path}`
